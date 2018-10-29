@@ -155,15 +155,15 @@
 //          return b + a++; 
 //      }    
 //  }
-//  
+ 
 //  var f=fn();//a = 0
-//
+
 //  console.log(f(5)); //5 + 0 ++   5  a = 1
-//
+
 //  console.log(fn()(5)); //a = 0  5+0++ 5  a = 1
-//
+
 //  console.log(f(5)); //5+1 ++  6  a=2
-//
+
 //  console.log(a); //2
 
 /******************第二题*********************/
@@ -199,48 +199,48 @@
 */
 //console.log(5 + (++k) + (k++) + 4 + (k--) + (++k) + 3 + (--k) + (k++), k); //26,3
 
-//	function fn(i) {
-//	    return function (n) {
-//	        console.log(n + (i++));
-//	    }
-//	}
-//	var f = fn(10);//i=10
-//	
-//	f(20);//n=20 + 10  30   i=11
-//	
-//	fn(20)(40); //20+40  60    此处就是一般的函数执行，执行完父级的变量和参数销毁，不会保存
-//	
-//	fn(30)(50); //30+50   80
-//	
-//	f(30);//30+11    i=12    41
-//	
-//	f(20);//20+12   32   i=13
+	// function fn(i) {
+	//     return function (n) {
+	//         console.log(n + (i++));
+	//     }
+	// }
+	// var f = fn(10);//i=10
+	
+	// f(20);//n=20 + 10  30   i=11
+	
+	// fn(20)(40); //20+40  60    此处就是一般的函数执行，执行完父级的变量和参数销毁，不会保存
+	
+	// fn(30)(50); //30+50   80
+	
+	// f(30);//30+11    i=12    41
+	
+	// f(20);//20+12   32   i=13
 
 
 /***********************3**************************/
 
-//	var i = 10;
-//	function fn() {
-//	    return function (n) {
-//	        console.log(n + (++i));
-//	    }
-//	}
-//	var f = fn();
-//	
-//	f(20);//20+11     31   i=11
-//	
-//	fn()(20);//20+12  32   i=12
-//	
-//	fn()(30); //30+13 43   i=13
-//	
-//	f(30); //30+14  44    i=14
-//	console.log(i);
+	// var i = 10;
+	// function fn() {
+	//     return function (n) {
+	//         console.log(n + (++i));
+	//     }
+	// }
+	// var f = fn();
+	
+	// f(20);//20+11     31   i=11
+	
+	// fn()(20);//20+12  32   i=12
+	
+	// fn()(30); //30+13 43   i=13
+	
+	// f(30); //30+14  44    i=14
+	// console.log(i);
 
 
 /***********************4**************************/
 
-	var num = 10;
-	var obj = {num: 20};
+	// var num = 10;
+	// var obj = {num: 20};
 	/*
 		obj = {
 			num:20,
@@ -256,28 +256,49 @@
 	        console.log(num);
 	    }
 	*/
-	obj.fn = (function (num) { //num=20
+	// obj.fn = (function (num) { //num=20
 		
-		//window.num = 60
-	    this.num = num * 3;
+	// 	//window.num = 60
+	//     this.num = num * 3;
 	    
-	    num++;
-	    //num=21
-	    return function (n) {
-	        this.num += n;
-	        num++;
-	        console.log(num); //22  23
-	    }
-	})(obj.num); //匿名函数自执行的this就是window
+	//     num++;
+	//     //num=21
+	//     return function (n) {
+	//         this.num += n;
+	//         num++;
+	//         console.log(num); //22  23
+	//     }
+	// })(obj.num); //匿名函数自执行的this就是window
 
 	
-	var fn = obj.fn;
+	// var fn = obj.fn;
 	
-	fn(5);//60 += 5  65 window.num = 65    num=22
+	// fn(5);//60 += 5  65 window.num = 65    num=22
 	
-	obj.fn(10); //20 += 10    obj.num = 30
+	// obj.fn(10); //20 += 10    obj.num = 30
 	
-	console.log(num, obj.num); //65  30
+	// console.log(num, obj.num); //65  30
+
+    var num = 20;
+    var obj = {
+        num : 30,
+        fn : (function (num) {
+            this.num *= 3;
+            num += 15;
+            console.log(num);
+            var num = 45;
+            return function () {
+                this.num *= 4;
+                num += 20;
+                console.log(num);
+            }
+        })(num)
+    };
+    var fn = obj.fn;
+    fn();
+    obj.fn();
+    console.log(window.num, obj.num);
+
 	
 
 

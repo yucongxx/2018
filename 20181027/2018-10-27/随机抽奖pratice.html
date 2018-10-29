@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <button id="btn1">开始</button>
+    <button id="btn2">停止</button>
+    <p></p>
+    <script>
+        let pButtn=document.getElementsByTagName('p')[0];
+        let arr = [
+            '呆呆',
+            '胖嘟嘟',
+            '小胖子',
+            '呆囡囡是小胖子'
+        ];
+        let timer = null;
+        let num = 0;
+        btn1.onclick = function () {
+            timer = setInterval(function () {
+                pButtn.innerHTML = arr[num];
+                num++;
+                num %= arr.length;
+            }, 60);
+        }
+        btn2.onclick = function () {
+            clearInterval(timer);
+            pButtn.innerHTML=arr[3];
+        }
+    </script>
+</body>
+
+</html>
