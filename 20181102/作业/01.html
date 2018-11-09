@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        ul {
+            list-style: none;
+            margin: 100px auto 0;
+            padding: 0;
+            width: 1300px;
+            border: 1px solid #000;
+        }
+        li {
+            padding: 10px;
+            float: left;
+            width: 300px;
+            position: relative;
+        }
+        li div {
+            text-align: center;
+        }
+            li div:nth-of-type(2) {
+            margin: 20px 0;
+            text-align: center;
+        }
+        li div:nth-of-type(2) span {
+            padding: 10px;
+            background: #e15671;
+            color: white;
+            border-radius: 10px;
+        }
+        .text1 {
+            width: 240px;
+        }
+        li div:nth-of-type(3) {
+            padding: 20px;
+        }
+        .goods_name {
+            line-height: 40px;
+        }
+        .img {
+            width: 100px;
+            height: 140px;
+        }
+        li .sold_out {
+            position: absolute;
+            left: -38px;
+            -left: 61px;
+            top: 0;
+            -top: 76px;
+            width: 396px;
+            -width: 198px;
+            height: 396px;
+            -height: 198px;
+            opacity: 0;
+            display: none;
+            z-index: 999999;
+        }
+        li .mask {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            background: rgb(0,0,0);
+            opacity: 0;
+            display: none;
+        }
+        .table {
+            margin: 30px auto 0;
+            width: 1300px;
+        }
+        tbody tr {
+            opacity: 0;
+        }
+        tbody img {
+            width: 50px;
+            height: 50px;
+        }
+</style>
+</head>
+
+<body>
+    <ul class="clear">
+        <li>
+            <div>
+                <input type="text" class="text1">
+                <button>确定</button>
+            </div>
+            <div class="time">
+                剩余：
+                <span>0</span>
+                <span>0</span>
+                :
+                <span>0</span>
+                <span>0</span>
+                :
+                <span>0</span>
+                <span>0</span>
+            </div>
+            <div>
+                <img class="img" src="images/goods_1.png" alt="">
+            </div>
+            <div>
+                <strong class="goods_name">iphone6s</strong>
+            </div>
+            <div>
+                抢购价：<span class="goods_price">￥ 6000</span>
+            </div>
+
+            <img class="sold_out" src="images/sold-out.png" alt="">
+            <div class="mask"></div>
+        </li>
+        <li>
+            <div>
+                <input type="text" class="text1">
+                <button>确定</button>
+            </div>
+            <div class="time">
+                剩余：
+                <span>0</span>
+                <span>0</span>
+                :
+                <span>0</span>
+                <span>0</span>
+                :
+                <span>0</span>
+                <span>0</span>
+            </div>
+            <div>
+                <img class="img" src="images/goods_2.png" alt="">
+            </div>
+            <div>
+                <strong class="goods_name">iMac</strong>
+            </div>
+            <div>
+                抢购价：<span class="goods_price">￥ 19999</span>
+            </div>
+
+            <img class="sold_out" src="images/sold-out.png" alt="">
+            <div class="mask"></div>
+        </li>
+        <li>
+            <div>
+                <input type="text" class="text1">
+                <button>确定</button>
+            </div>
+            <div class="time">
+                剩余：
+                <span>0</span>
+                <span>0</span>
+                :
+                <span>0</span>
+                <span>0</span>
+                :
+                <span>0</span>
+                <span>0</span>
+            </div>
+            <div>
+                <img class="img" src="images/goods_3.png" alt="">
+            </div>
+            <div>
+                <strong class="goods_name">ipod</strong>
+            </div>
+            <div>
+                抢购价：<span class="goods_price">￥ 1000</span>
+            </div>
+
+            <img class="sold_out" src="images/sold-out.png" alt="">
+            <div class="mask"></div>
+        </li>
+        <li>
+            <div>
+                <input type="text" class="text1">
+                <button>确定</button>
+            </div>
+            <div class="time">
+                剩余：
+                <span>0</span>
+                <span>0</span>
+                :
+                <span>0</span>
+                <span>0</span>
+                :
+                <span>0</span>
+                <span>0</span>
+            </div>
+            <div>
+                <img class="img" src="images/goods_4.png" alt="">
+            </div>
+            <div>
+                <strong class="goods_name">iWatch</strong>
+            </div>
+            <div>
+                抢购价：<span class="goods_price">￥ 2000</span>
+            </div>
+
+            <img class="sold_out" src="images/sold-out.png" alt="">
+            <div class="mask"></div>
+        </li>
+    </ul>
+
+    <div class="table">
+        <table width="1300">
+            <thead>
+                <tr>
+                    <th>商品</th>
+                    <th>价格</th>
+                    <th>图片</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script>
+        function animation(ele, attrs, duration, fx, callback) {
+
+            if (ele.timer) {
+                return;
+            }
+            var d = duration || 1000;
+            var obj = {};
+            for (var attr in attrs) {
+                obj[attr] = {};
+                obj[attr].b = parseFloat(getComputedStyle(ele)[attr]); obj[attr].c = attrs[attr] - obj[attr].b;
+            }
+
+            var fx = fx || 'linear';
+            var callback = callback || function () { };
+
+            var startTime = Date.now();
+
+            ele.timer = setInterval(function () {
+
+                var t = Date.now() - startTime;
+
+                if (t >= d) {
+                    t = d;
+                }
+
+                for (var attr in attrs) {
+                    var value = Tween[fx](t, obj[attr].b, obj[attr].c, d);
+
+                    if (attr == 'opacity') {
+                        ele.style[attr] = value;
+                    } else {
+                        ele.style[attr] = value + 'px';
+                    }
+                }
+
+                if (t == d) {
+                    clearInterval(ele.timer);
+                    ele.timer = null;
+                    callback();
+                }
+
+            }, 16);
+        }
+
+        var Tween = {
+            linear: function (t, b, c, d) { //匀速
+                return c * t / d + b;
+            },
+            easeIn: function (t, b, c, d) { //加速曲线
+                return c * (t /= d) * t + b;	//t/=d t = t / d
+            },
+            easeOut: function (t, b, c, d) { //减速曲线
+                return -c * (t /= d) * (t - 2) + b;
+            },
+            easeBoth: function (t, b, c, d) { //加速减速曲线
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * t * t + b;
+                }
+                return -c / 2 * ((--t) * (t - 2) - 1) + b;
+            },
+            easeInStrong: function (t, b, c, d) { //加加速曲线
+                return c * (t /= d) * t * t * t + b;
+            },
+            easeOutStrong: function (t, b, c, d) { //减减速曲线
+                return -c * ((t = t / d - 1) * t * t * t - 1) + b;
+            },
+            easeBothStrong: function (t, b, c, d) { //加加速减减速曲线
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * t * t * t * t + b;
+                }
+                return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+            },
+            elasticIn: function (t, b, c, d, a, p) { //正弦衰减曲线（弹动渐入）
+                if (t === 0) {
+                    return b;
+                }
+                if ((t /= d) == 1) {
+                    return b + c;
+                }
+                if (!p) {
+                    p = d * 0.3;
+                }
+                if (!a || a < Math.abs(c)) {
+                    a = c;
+                    var s = p / 4;
+                } else {
+                    var s = p / (2 * Math.PI) * Math.asin(c / a);
+                }
+                return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
+            },
+            elasticOut: function (t, b, c, d, a, p) { //正弦增强曲线（弹动渐出）
+                if (t === 0) {
+                    return b;
+                }
+                if ((t /= d) == 1) {
+                    return b + c;
+                }
+                if (!p) {
+                    p = d * 0.3;
+                }
+                if (!a || a < Math.abs(c)) {
+                    a = c;
+                    var s = p / 4;
+                } else {
+                    var s = p / (2 * Math.PI) * Math.asin(c / a);
+                }
+                return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
+            },
+            elasticBoth: function (t, b, c, d, a, p) {
+                if (t === 0) {
+                    return b;
+                }
+                if ((t /= d / 2) == 2) {
+                    return b + c;
+                }
+                if (!p) {
+                    p = d * (0.3 * 1.5);
+                }
+                if (!a || a < Math.abs(c)) {
+                    a = c;
+                    var s = p / 4;
+                }
+                else {
+                    var s = p / (2 * Math.PI) * Math.asin(c / a);
+                }
+                if (t < 1) {
+                    return - 0.5 * (a * Math.pow(2, 10 * (t -= 1)) *
+                        Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
+                }
+                return a * Math.pow(2, -10 * (t -= 1)) *
+                    Math.sin((t * d - s) * (2 * Math.PI) / p) * 0.5 + c + b;
+            },
+            backIn: function (t, b, c, d, s) { //回退加速（回退渐入）
+                if (typeof s == 'undefined') {
+                    s = 1.70158;
+                }
+                return c * (t /= d) * t * ((s + 1) * t - s) + b;
+            },
+            backOut: function (t, b, c, d, s) {
+                if (typeof s == 'undefined') {
+                    s = 3.70158; //回缩的距离
+                }
+                return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
+            },
+            backBoth: function (t, b, c, d, s) {
+                if (typeof s == 'undefined') {
+                    s = 1.70158;
+                }
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
+                }
+                return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
+            },
+            bounceIn: function (t, b, c, d) { //弹球减振（弹球渐出）
+                return c - Tween['bounceOut'](d - t, 0, c, d) + b;
+            },
+            bounceOut: function (t, b, c, d) {
+                if ((t /= d) < (1 / 2.75)) {
+                    return c * (7.5625 * t * t) + b;
+                } else if (t < (2 / 2.75)) {
+                    return c * (7.5625 * (t -= (1.5 / 2.75)) * t + 0.75) + b;
+                } else if (t < (2.5 / 2.75)) {
+                    return c * (7.5625 * (t -= (2.25 / 2.75)) * t + 0.9375) + b;
+                }
+                return c * (7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375) + b;
+            },
+            bounceBoth: function (t, b, c, d) {
+                if (t < d / 2) {
+                    return Tween['bounceIn'](t * 2, 0, c, d) * 0.5 + b;
+                }
+                return Tween['bounceOut'](t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+            }
+        };
+    </script>
+    <script>
+
+        var liElements = document.querySelectorAll('li');
+        var tbodyElements = document.querySelector('.table tbody');
+
+        liElements.forEach(function (li) {
+            soldOut(li);
+        });
+
+        function soldOut(li) {
+            /*
+            * 以其中给一个li来做逻辑处理
+            * */
+            var buttonElement = li.querySelector('button');
+            var text1Element = li.querySelector('.text1');
+            var maskElement = li.querySelector('.mask');
+            var soldOutElement = li.querySelector('.sold_out');
+            var timeSpanElement = li.querySelectorAll('.time span');
+
+            var goodsName = li.querySelector('.goods_name').innerHTML;
+            var goodsPrice = li.querySelector('.goods_price').innerHTML;
+            var goodsImg = li.querySelector('.img').src;
+
+            /*
+            * 点击按钮获取倒计时的时间
+            * */
+            buttonElement.onclick = function () {
+                var seconds = parseInt(text1Element.value);
+
+                /*
+                * 把seconds变成时分秒的格式，并计算倒计时
+                * */
+                var timer = setInterval(function () {
+                    seconds--;
+
+                    if (seconds >= 0) {
+                        var timeArr = seconds2HMS(seconds).split('');
+
+                        timeArr.forEach(function (item, index) {
+                            timeSpanElement[index].innerHTML = item;
+                        });
+                    } else {
+                        //时间到了
+                        clearInterval(timer);
+                        timeOver();
+                        add2List();
+                    }
+
+
+                }, 1000);
+
+
+            };
+
+            function timeOver() {
+                maskElement.style.display = 'block';
+                // maskElement.style.opacity = '0.5';
+                animation(maskElement, {
+                    opacity: 0.5
+                }, 500);
+
+                soldOutElement.style.display = 'block';
+                animation(soldOutElement, {
+                    width: 198,
+                    height: 198,
+                    left: 61,
+                    top: 76,
+                    opacity: 1
+                }, 500, 'bounceOut');
+
+                setTimeout(function () {
+                    shake(li, 'left', 20, 2);
+                }, 200);
+            }
+
+            /*
+            * 添加当前的商品信息到表格列表中
+            * */
+            function add2List() {
+
+                tbodyElements.innerHTML += '<tr><td>' + goodsName + '</td><td>' + goodsPrice + '</td><td><img src="' + goodsImg + '"/></td></tr>';
+
+                var trElements = tbodyElements.querySelectorAll('tr');
+                //获取到最后一个tr，也就是当前最新一次添加的元素
+                // console.log(trElements[trElements.length - 1]);
+                // animation(trElements[trElements.length - 1], {
+                // opacity: 1
+                // }, 100);
+
+                trElements.forEach(function (tr) {
+                    animation(tr, {
+                        opacity: 1
+                    }, 100);
+                }, 1000);
+
+            }
+        }
+
+
+        /*
+        * 把秒钟转成时分秒格式
+        * */
+        function seconds2HMS(seconds) {
+
+            var H = addZero(parseInt(seconds / 3600));
+            var M = addZero(parseInt(seconds % 3600 / 60));
+            var S = addZero(parseInt(seconds % 60));
+
+            return H + M + S;
+        }
+
+        function addZero(v) {
+            return (v < 10 ? '0' : '') + v;
+        }
+
+        /*
+        * 颤抖吧！
+        * */
+        function shake(element, attr, range, step) {
+
+            /*
+            * 获取元素在颤抖之前的位置
+            * */
+            var originValue = getCss(element, attr);
+            /*
+            * 表示+还是-
+            * */
+            var flag = true;
+
+            var timer = setInterval(function () {
+
+                if (flag) {
+                    //先负
+                    element.style[attr] = originValue - range + 'px';
+                } else {
+                    element.style[attr] = originValue + range + 'px';
+                    //自减
+                    range -= step;
+
+                    if (range <= 0) {
+                        element.style[attr] = originValue + 'px';
+                        clearInterval(timer);
+                    }
+                }
+
+                flag = !flag;
+
+            }, 16);
+
+        }
+
+        function getCss(element, attr) {
+            return parseFloat(element.currentStyle ? element.currentStyle[attr] : getComputedStyle(element)[attr]);
+        }
+    </script>
+</body>
+
+</html>

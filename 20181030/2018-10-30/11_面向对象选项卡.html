@@ -44,8 +44,8 @@
         this.box = document.getElementById(id);
         this.btns = this.box.getElementsByTagName('button');
         this.divs = this.box.getElementsByTagName('div');
-        this.timer = null;
-        this.num = 0;
+        // this.timer = null;
+        // this.num = 0;
     }
 
     //写方法
@@ -71,25 +71,20 @@
     }
 
 
-    Tab.prototype.play = function(){
-        //定时器中的this指向window
-        let that = this;
-        this.timer = setInterval(function(){
-            that.num ++;
-            that.num %= that.btns.length;
-            that.change(that.num);
-        },1000);
-    }
-
-
-
-
-
+    // Tab.prototype.play = function(){
+    //     //定时器中的this指向window
+    //     let that = this;
+    //     this.timer = setInterval(function(){
+    //         that.num ++;
+    //         that.num %= that.btns.length;
+    //         that.change(that.num);
+    //     },1000);
+    // }
 
 
     let t = new Tab('box');
     t.events('onclick');
-    t.play();
+    // t.play();
 
     console.log(t)
 
