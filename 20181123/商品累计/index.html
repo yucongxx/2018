@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="price.css" />
+</head>
+
+<body onselectstart="return false;">
+	<div class="wrap">
+		<div class="box">
+			<ul class="list" id="list">
+				<!-- <li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li> -->
+				<!-- <li>
+							<i></i>
+							<em></em>
+							<i></i>
+							<span>
+								单价：<strong></strong> 小计：<strong>0元</strong>
+							</span>
+						</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li> -->
+			</ul>
+			<div class="info" id="info">
+				<span>商品公合计：<em>0</em>件</span>
+				<span>共花费了：<em>0</em>元</span>
+				<br />
+				<br />
+				<span>其中最贵的商品单价是：<em>0</em>元</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		let arr = [
+			{
+				num: 0,
+				price: 10.5,
+				sum: 0
+			},
+			{
+				num: 0,
+				price: 12.5,
+				sum: 0
+			},
+			{
+				num: 0,
+				price: 8.5,
+				sum: 0
+			},
+			{
+				num: 0,
+				price: 5.5,
+				sum: 0
+			},
+			{
+				num: 0,
+				price: 250,
+				sum: 0
+			},
+		];
+
+		class Cal {
+			constructor(i) {
+				this.index = i;
+				this.num = 0;
+				this.sum = 0;
+			}
+			add() {
+				return ++this.num;
+			}
+			rm() {
+				this.num--;
+				if (this.num < 0) {
+					this.num = 0
+				}
+				return this.num;
+			}
+			render() {
+				let li = document.createElement('li');
+				li.innerHTML = `<i></i>
+								<em>${arr[this.index].num}</em>
+								<i></i>
+								<span>
+									单价：<strong class="price">${arr[this.index].price}元 </strong> 小计：<strong class="sum">${arr[this.index].sum}元</strong>
+								</span>`;
+				list.appendChild(li);
+				this.btns = li.getElementsByTagName('i');
+				this.em = li.getElementsByTagName('em')[0];
+				this.price = li.getElementsByClassName('price')[0];
+				this.sum = li.getElementsByClassName('sum')[0];
+				console.log(this.btns);
+			}
+			event() {
+				this.render();
+				this.btns[0].addEventListener('click', () => {
+					this.change(true);
+				});
+				this.btns[1].addEventListener('click', () => {
+					this.change();
+				});
+			}
+			change(onOff) {
+				arr[this.index].num = onOff ? this.rm() : this.add();
+				arr[this.index].sum = arr[this.index].num * arr[this.index].price;
+				this.em.innerHTML = arr[this.index].num;
+				this.sum.innerHTML = arr[this.index].sum + '元';
+				f.render();
+			}
+
+		}
+
+		class Footer {
+			constructor() {
+				this.info = document.getElementById('info');
+				this.sumAll = this.info.getElementsByTagName('em');
+				console.log(this.sumAll);
+			}
+			sumall(arr) {
+				return arr.reduce((total, num) => {
+					return total + num;
+
+				})
+			}
+			zuigui(arr) {
+				return Math.max(...arr);
+			}
+			render() {
+				this.sumAll[0].innerHTML = this.sumall(arr.map(e => {
+					return e.num;
+				}));
+				this.sumAll[1].innerHTML = this.sumall(arr.map(e => {
+					return e.sum;
+				}));
+				let n = arr.filter(e => e.num).map(e => e.price);
+				this.sumAll[2].innerHTML = n.length ? this.zuigui(n) : 0;
+			}
+		}
+
+		let f = new Footer;
+		arr.forEach((e, i) => {
+			let a = new Cal(i);
+			a.event();
+		})
+	</script>
+</body>
+
+</html>

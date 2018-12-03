@@ -33,13 +33,11 @@
 // let str = '我的名字叫{name}，{12}今年{age1}岁,我还有个妹妹叫{mm}，今年{age2}岁.';
 
 
-// let s = str.replace(/\{(\w+)\}/g, ($0, $1) => {
-//     console.log($1);
+// let s=str.replace(/\{(\w+)\}/g,($0,$1)=>{
 //     return obj[$1];
+
 // })
-
 // console.log(s);
-
 
 // let arr = [1, 1, 22, 5];
 
@@ -94,42 +92,34 @@
 // }
 
 //抖函数2
-// const box = document.getElementById('box');
-
-// box.onclick = function () {
-//     dou(box,'left',20,function (){
-//         box.style.background="skyblue";
-//         setTimeout(()=>{
-//             box.style.left='500px';
+// box.onclick=function (){
+//     dou(box,'left',15,function(){
+//         box.style.background='skyblue';
+//         setTimeout(function (){
+//             box.style.top='500px';
 //             box.style.transition='1s';
-//         },50);
-
-//     })
+//         })
+//     });
 // }
 
 
-
-// function dou(ele,attr,n,callback){
-//     let arr=[];
-//     let timer=null;
-//     let num=0;
-//     for(let i=n;i>0;i-=2){
-//         arr.push(i,-i);
+// function dou(ele, attr, n, callback) {
+//     let arr = [];
+//     let timer = null;
+//     let num = 0;
+//     for (let i = n; n > 0; n -= 2) {
+//         arr.push(i, -i);
 //     }
 //     arr.push(0);
-
-//     let begin=parseFloat(getComputedStyle(ele)[attr]);
-//     timer=setInterval(()=>{
-//         ele.style[attr]=begin+arr[num]+'px';
-//         num++;
-//         if(num>arr.length){
+//     let begin = parseFloat(getComputedStyle(ele)[attr]);
+//     timer = setInterval(() => {
+//         ele.style[attr] = arr[num] + begin + 'px';
+//         num++
+//         if (num > arr.length) {
 //             clearInterval(timer);
-//             num=0;
-//             if(callback){
-//                 callback();
-//             }
+//             callback && callback();
 //         }
-//     },16.7);
+//     }, 16.7)
 // }
 
 
@@ -208,8 +198,8 @@
 // }
 // l -= box3L;
 // console.log(l);
-// // console.log(box3.clientLeft);
-// // console.log(getComputedStyle(box3).borderLeftWidth);
+// console.log(box3.clientLeft);
+// console.log(getComputedStyle(box3).borderLeftWidth);
 
 // console.log(box3.getBoundingClientRect());
 // console.log(obj.offset('#box3').left);
@@ -382,91 +372,86 @@ return 引用类型=引用类型    return写啥是啥
 构造函数原型proto->object.prototype
 
 8.this会出现哪些地方，改变this的方法有哪些
-
 window
-    fn();
-    定时器
-    箭头函数暴露在全局
-    匿名函数
+fn()
+定时器
+箭头函数暴露在全局
+自执行函数
 
 对象
-    .前面的
+.前面的
 
 实例化对象
-    实例
+构造函数执行
 
 undefined
-    严格模式'use strict'
+严格模式下'use strict'
 
 绑定事件
-    当前操作的元素
+this是当前操作的元素
 
 父级域的this
-    箭头函数
-
+箭头函数
 
 call
-    无数参数，第一个参数改变this指向
-    第二个以后是实参
+第一个参数是改变this指向，后面的参数无数个，实参
 
 apply
-    2个参数，第二个参数是数组
+第一个参数是改变this指向，后面是一个数组，数组里面是实参
 
 bind
-    无数参数，调用后不会马上执行，而是返回一个改变this之后的函数
+第一个参数改变this指向，后面可以有无数个实参，但是不会执行
+
 
 
 9.继承的方式
-    call（类式继承）
-    调用父类，call改变this
 
-    拷贝
-    for in
-    hasOwnProperty
-    children.prototype=Object.assign({},parent.prototype);
+   call（类式继承）
+   parent.call(this,name,age)
 
-    原型
-    function ph(){}
-    ph.prototype=parent.prototype
-    children.prototype=new ph();
-    children.prototype.constructor=children;
-
-    寄生式组合
-    children.prototype=Object.create(parent.prototype);
-
-    对象继承
-    function ph(){}
-    ph.prototype=parent.prototype
-    obj.__proto__=new ph;
-
-    ES6继承
-    class children extends Parent{
-        constructor(,...arg){
-            super(..arg);
-        }
+   拷贝继承
+   for(let attr in obj){
+    if(parent.prototype.hasOwnProperty(attr)){
+        children.prototype[attr]=parent.prototype[attr];
     }
+   }
 
-    10.如何进行数据劫持
+   原型继承
+   function ph(){}
+   ph.prototype=parent.prototype;
+   children.prototype=new ph();
+   children.prototype.constructor=children
+
+   寄生式继承
+   children.prototype=Object.create(parent.prototype)
+
+   es6继承
+   class Children extends Parent{
+       construstor(,...arg){
+           super(...arg);
+       }
+   }
+
+
+10.如何进行数据劫持
 
 
 */
 
-let obj = {
-    num: 2
-}
-let n = 2;
-Object.defineProperty(obj, 'num', {
-    get() {
-        n += 2;
-        return n;
-    },
-    set() {
+// let obj={
+//     num:2
+// }
+// let n=2;
+// Object.defineProperty(obj,'num',{
+//     get(){
+//         n+=2;
+//         return n;
+//     },
+//     set(){
 
-    }
-})
-
-console.log(obj.num < 5 && obj.num > 5);
-console.log(obj.num);
+//     }
+// });
 
 
+// console.log(obj.num<5&&obj.num>5);
 

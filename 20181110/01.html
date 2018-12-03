@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: orange;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style:none;
+        }
+        h2{
+            text-align: center;
+        }
+        .wrap{
+            width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #fff;
+            background-color: #fff;
+            margin: 100px auto;
+            padding: 30px;
+        }
+        ul{
+            margin-left: 10px;
+        }
+        li{
+            margin-top: 20px;
+        }
+        li span{
+            width: 70px;
+            text-align: right;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        button{
+            margin-left: 104px;
+            margin-top: 20px;
+            width: 100px;
+            height: 30px;
+        }
+        button.bnd{
+            cursor:no-drop;
+        }
+        button.nd{
+            cursor: pointer;
+        }
+
+
+        .success{
+            border-color: green;
+            color: green;
+        }
+        .fail{
+            border-color: red;
+            color: red;
+        }
+        input{
+            outline: none;
+            height: 30px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h2>注册信息</h2>
+        <ul>
+            <li>
+                <span>QQ</span>
+                <input type="text" placeholder="请输入QQ号" class="qq">
+            </li>
+
+            <li>
+                <span>邮箱</span>
+                <input type="text" placeholder="请输入邮箱" class="email">
+            </li>
+
+            <li>
+                <span>手机</span>
+                <input type="text" placeholder="请输入手机号" class="phone">
+            </li>
+
+            <li>
+                <span>出生日期</span>
+                <input type="text" placeholder="请输入****年*月*日" class="day">
+            </li>
+        </ul>
+        <button class="btn bnd" id="btn" disabled>注册</button>
+    </div>
+    <script src="js/01.js"></script>
+</body>
+
+</html>

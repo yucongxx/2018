@@ -91,34 +91,35 @@
 
 
 //河蟹聊天
-// let txt = document.getElementById('ipt');
-// let btn = document.getElementById('btn');
-// let ul = document.getElementById('ul');
+const ipt = document.getElementById('ipt');
+const btn = document.getElementById('btn');
+const ul = document.getElementById('ul');
 
-// let ary = ['操', 'sb', '艹', '靠'];
-// let ary2 = ['#', '^', '&', '@', '*'];
+let arr = ['cao', '艹', '靠', '妹'];
+let arr2 = ['$', '#', '*'];
+let re = new RegExp(arr.join('|'), 'g');
+console.log(re);
 
-// let re = new RegExp(ary.join('|'), 'ig');
-
-// btn.onclick = function () {
-//     let val = txt.value;
-//     if (!val) {
-//         alert('请输入内容');
-//     }
-//     let s = val.replace(re, function ($0) {
-//         let temp = '';
-//         for (let i = 0; i < $0.length; i++) {
-//             temp += ary2.sort(() => Math.random() - .5)[0];
-//         }
-//         return temp;
-//     })
-//     let li=document.createElement('li');
-//     li.innerHTML=s;
-//     ul.appendChild(li);
-//     txt.value='';
-//     console.log(val);
-// }
-
+btn.onclick = function () {
+    let v = ipt.value;
+    if (!v) {
+        alert('请输入内容');
+        return;
+    }
+    console.log(v);
+    let a = v.replace(re, ($0) => {
+        let temp = '';
+        for (let i = 0; i < $0.length; i++) {
+            temp += arr2.sort(()=>Math.random()- .5)[0];
+        }
+        return temp;
+    });
+    console.log(a);
+    const li = document.createElement('li');
+    li.innerHTML = a;
+    ul.appendChild(li);
+    ipt.value='';
+}
 
 
 /*格式化日期（分组）

@@ -45,15 +45,17 @@
     //     }
     // }
 
-    
+   
+ 
     let str2 = str.split('').sort().join('');
+    console.log(str2);
     /*
          str.split('')
     */
 
     // console.log( str.split('').sort().join(''))
     str2.replace(/([a-z])\1+/g,function($0,$1){ //$0本次匹配的字符，$1,第一个分组
-        console.log('$0:'+$0,'$1:'+$1)
+        console.log($0,$1);
         if(n < $0.length){
             n = $0.length;
             name = $1;

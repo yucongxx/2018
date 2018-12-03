@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            var obj = document.getElementById("showZone");
+            var disX = disY = 0;
+            var dragIf = false;
+            var position = [{ x: obj.offsetLeft, y: obj.offsetTop }];//这个是实现记录和回放的关键，其它都是基本元素的获取 
+            var oa = document.getElementsByTagName("a")[0];
+
+            obj.onmousedown = function (event) {
+                var event = event || window.event;
+                disX = event.clientX - obj.offsetLeft;//鼠标相对于div边框的距离 
+                disY = event.clientY - obj.offsetTop;
+                dragIf = true;//可以进行拖拽的标志 
+
+                position.push({ x: obj.offsetLeft, y: obj.offsetTop });//记录从这时候就开始了 
+                return false;
+            };
+            document.onmousemove = function (event) {
+
+                if (!dragIf) return;//这个判断极为重要，只有按下的移动才有效 
+                var event = event || window.event;
+                var nowX = event.clientX - disX;//根据上面记录的鼠标相对div的距离就知道div相对网页的距离了吧 
+                var nowY = event.clientY - disY;
+                var maxX = document.documentElement.clientWidth - obj.offsetWidth;//这里是offsetWidth，是div的宽度，不是offsetLeft 
+                var maxY = document.documentElement.clientHeight - obj.offsetHeight;
+                nowX = nowX < 0 ? 0 : nowX;//这些判定，只是判断不要出了边界 
+                nowY = nowY < 0 ? 0 : nowY;
+                nowX = nowX > maxX ? maxX : nowX;
+                nowY = nowY > maxY ? maxY : nowY;
+
+                obj.style.marginTop = obj.style.marginLeft = 0;
+                obj.style.left = nowX + "px";//不要忘记+“px”，只有style.left/top是有“px”的 
+                obj.style.top = nowY + "px";
+                position.push({ x: nowX, y: nowY });//不停记录啊 
+                obj.innerHTML = "X:" + nowX + "Y:" + nowY;//直观的看到变化 
+                return false;
+            };
+            document.onmouseup = function () {
+                dragIf = false;//不允许再进行拖拽和记录了 
+                obj.innerHTML = "X:" + obj.offsetLeft + "Y:" + obj.offsetTop;
+            };
+            oa.onclick = function () {
+                if (position.length == 1) return;//只有一个的时候，说明并未移动 
+                var timer = setInterval(function () {
+                    var oPos = position.pop();
+                    oPos ? (obj.style.left = oPos.x + "px", obj.style.top = oPos.y + "px") : clearInterval(timer);//又被这个写法惊艳到 
+                }, 30);
+                return false;
+            };
+        };
+
+    </script>
+
+    <div style="width: 50px;height: 50px;background-color: cyan;display: block;position: absolute;" id="showZone"></div>//这个还是那么熟悉啊
+    <a href="#" style="position: absolute;margin-top: 100px;color: yellow;background-color: red;">reback</a>//这个是来回放的
+
+</body>
+
+</html>
