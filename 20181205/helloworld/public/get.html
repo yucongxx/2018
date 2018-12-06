@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .ok{
+        border: 1px solid green;
+    }
+    .error{
+        border: 1px solid red;
+    }
+    </style>
+</head>
+
+<body>
+    用户名:<input type="text" id="txt" />
+    <input type="button" value="提交" id="btn">
+    <script>
+        /*
+            get请求特性：
+            比post快
+            get会将数据缓存起来，post不会
+            url字节长度是每个浏览器都是不一样的（体积是有限的）
+            相对来说是不安全的
+            中文的转码问题（在chrome中中文会自动转成URI编码，而IE不会）
+            所以手动转编码
+            更擅长于查找战术数据，轻量的数据
+    
+            URI统一资源标识符
+            URL统一资源定位符
+            URN统一资源名称
+    
+            decodeURI('%E7%8E%8B')->中文
+            encodeURI(中文)->uri编码
+    
+        */
+        btn.onclick = function () {
+            let xhr = new XMLHttpRequest;
+            xhr.open('get', '/get?ren=' + encodeURI(txt.value), true);
+            xhr.send();
+            xhr.onload = function () {
+                console.log(xhr.responseText);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

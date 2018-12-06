@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .ok{
+        border:1px solid greenyellow;
+    }
+    .error{
+        border:1px solid red;
+
+    }
+</style>
+</head>
+
+<body>
+    用户名:<input type="text" name="user" id="txt">
+    <input type="button" value="提交" id="btn">
+
+
+    <script src="javascripts/jquery-3.2.1.min.js"></script>
+    <script>
+        $('#txt').blur(function(){
+            $.ajax({
+                url:'/get',
+                data:{
+                    user: $(this).val()
+                },
+                // dataType: 'json',
+                success: function (json) {
+                    // console.log(data);
+                    let data=JSON.parse(json);
+                    if (data.code == 1) {
+                        $('#txt').removeClass('error');
+                        $('#txt').addClass('ok');
+                    }
+                    if (data.code == 0) {
+                        $('#txt').removeClass('ok');
+                        $('#txt').addClass('error');
+                    }
+                }
+            })
+        });
+      
+    </script>
+</body>
+
+</html>

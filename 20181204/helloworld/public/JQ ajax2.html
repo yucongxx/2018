@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="今日插曲" id="btn">
+    <ul id="ul"></ul>
+    <script src="./javascripts/jquery-3.2.1.min.js"></script>
+    <script>
+
+        $('#btn').click(function () {
+            $.ajax({
+                url: '/player',//后台给的
+                data: {
+                    json: 'true'//后台和你一起定
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code === 0) {
+                        let temp = '';
+                        data.msg.forEach(d => {
+                          
+                            temp += `<li>${d.filename}</li>`
+      
+                        });
+                        console.log(data);
+                        $('#ul').html(temp);
+                    }
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

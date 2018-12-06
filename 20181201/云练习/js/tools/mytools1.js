@@ -61,18 +61,30 @@ let myTools = (function () {
     function addAttr(attr, value) {
         for (let k in data) {
             if (Array.isArray(value)) {
-                data[k][attr]=[];
-            }else{
-                data[k][attr]=value;
+                data[k][attr] = [];
+            } else {
+                data[k][attr] = value;
             }
         }
     }
+    let children = [];
+
+    function getChildren(pid) {
+        let arr = getChild(pid);
+        arr && arr.forEach(e => {
+            children.push(e);
+            getChildren(e.id);
+        });
+    }
+
     return {
         getChild,
         getParent,
         getParents,
         duang,
         targetP,
-        addAttr
+        addAttr,
+        children,
+        getChildren
     }
 })();

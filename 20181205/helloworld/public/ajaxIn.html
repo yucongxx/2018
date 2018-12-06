@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .ok {
+            border: 1px solid green;
+        }
+
+        .error {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    用户名:<input type="text" id="txt" />
+    <input type="button" value="提交" id="btn">
+    <script>
+        //xxx.com?a=5#id=0
+        //?a=5问号到井号之间的信息叫查询信息  window.location.search
+        //key=val&key=val
+        btn.onclick = function () {
+            //在ie下，有activeXObject插件
+            //new ActiveXObject('Mscrosoft.XMLHttp');
+
+            let xhr = new XMLHttpRequest;
+            //请求方式有，get post delete put
+            //get通过URL的方式去请求服务器
+
+            xhr.open('get', '/get?ren=' + txt.value, true);
+            xhr.send();
+            xhr.onload = function () {
+                console.log(xhr.responseText);
+            }
+        }
+
+        //未来会用下面这个
+        // btn.onclick = function () {
+        //     fetch('/get?ren=' + txt.value)
+        //         .then((e) => {
+        //             return e.json();
+        //         })
+        //         .then(data => {
+        //             console.log(data)
+        //         });
+
+        // }
+
+    </script>
+</body>
+
+</html>

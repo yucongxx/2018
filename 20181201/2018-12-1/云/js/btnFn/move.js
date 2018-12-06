@@ -1,18 +1,18 @@
 const remove = document.getElementById('remove');
 const ok = modelTree.getElementsByClassName('ok')[0];
 let kid = 0;
-remove.onclick = function(){
-    if(!seleEleArr.length){
+remove.onclick = function () {
+    if (!seleEleArr.length) {
         console.log('请选择想移动的文件');
-    }else{
+    } else {
         modelTree.style.display = 'block';
-        content.appendChild(renderTree2(-1,-1));
+        content.appendChild(renderTree2(-1, -1));
     }
 }
-
+// console.log(kid);
 //移动的时候
-ok.onclick = function(){
-    log(kid,seleEleArr);
+ok.onclick = function () {
+    log(kid, seleEleArr);
 
     /* 
         [{id:321321,pid:0}]
@@ -20,8 +20,8 @@ ok.onclick = function(){
         {id:321321,pid:321321}
 
     */
-    if(seleEleArr.length){
-        
+    if (seleEleArr.length) {
+
         /* 
             把选中的文件夹和他们下面的子级或孙子级都提取出来
             放到一个数组(children)中
@@ -31,7 +31,7 @@ ok.onclick = function(){
             getChildren(2)
 
         */
-        seleEleArr.forEach(e=>{
+        seleEleArr.forEach(e => {
             children.push(e);
             getChildren(e.id);
         });
@@ -42,68 +42,71 @@ ok.onclick = function(){
 
             如果没有包含kid说明操作符合逻辑，就应该移动文件夹
         */
-        if(!children.some(e=>e.id == kid)){
-            seleEleArr.forEach(e=>{
+
+        if (!children.some(e => e.id == kid)) {
+
+            seleEleArr.forEach(e => {
                 let arr = getChild(kid);
-            
-               
-                if(arr.some(el=>el.title === e.title)){
+
+
+                if (arr && arr.some(el => el.title === e.title)) {
                     // e.title = e.title + '-副本';
 
-                    let a = arr.filter(f=>{
-                        let re = new RegExp('^'+e.title+'(-副本)*$');
-                        // console.log(re.test(f.title));
+                    let a = arr.filter(f => {
+                        let re = new RegExp('^' + e.title + '(-副本)*$');
+                        console.log(re.test(f.title));
                         return re.test(f.title);
-                    }).sort((a,b)=>{
+                    }).sort((a, b) => {
                         return a.title.length - b.title.length;
                     });
-
-                    if(a.length == 1){
+                    console.log(a);
+                    if (a.length == 1) {
                         e.title = a[0].title + '-副本';
-                    }else{
-                        e.title = a[a.length-1].title + '-副本';
+                    } else {
+                        e.title = a[a.length - 1].title + '-副本';
                     }
                 }
                 e.pid = kid;
                 e.checked = false;
             });
-            render(breadNav.getElementsByTagName('span')[0].dataset.id*1);
-            treeMenu.appendChild(renderTree(-1,-1));
-        }else{
+            render(breadNav.getElementsByTagName('span')[0].dataset.id * 1);
+            treeMenu.appendChild(renderTree(-1, -1));
+        } else {
             console.log('凯文,别瞎搞!');
         }
         children.length = 0;
         modelTree.style.display = 'none';
     }
 }
-function renderTree2(pid,num){
+function renderTree2(pid, num) {
     content.innerHTML = '';
     let arr = getChild(pid);
     let ul = document.createElement('ul');;
     num++;
-    ul.style.paddingLeft = num*5 + "px";
-    arr && arr.forEach(e=>{
+    ul.style.paddingLeft = num * 5 + "px";
+    arr && arr.forEach(e => {
         let ary = getChild(e.id);
         let li = document.createElement('li');
-        li.onclick = function(ev){
+        li.onclick = function (ev) {
             let lis = content.getElementsByTagName('li');
-            for(let i=0;i<lis.length;i++){
+            for (let i = 0; i < lis.length; i++) {
                 lis[i].children[0].style.background = '';
             }
             li.children[0].style.background = '#999';
             //记录把选中的数据放到哪个数据下
             kid = e.id;
+            console.log(kid);
             ev.cancelBubble = true;
         }
         let div = document.createElement('div');
-        div.className = `tree-title ${ary?'tree-ico':''} close`;
+        div.className = `tree-title ${ary ? 'tree-ico' : ''} close`;
         let span = document.createElement('span');
-        span.className = `${ary?'open':''}`;
-        span.innerHTML = '<i></i>'+ e.title;
+        span.className = `${ary ? 'open' : ''}`;
+        span.innerHTML = '<i></i>' + e.title;
         div.appendChild(span);
         li.appendChild(div);
-        if(ary){
-            li.appendChild(renderTree2(e.id,num));
+        if (ary) {
+            li.appendChild(renderTree2(e.id, num));
         }
         ul.appendChild(li);
     });

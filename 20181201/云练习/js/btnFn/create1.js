@@ -71,6 +71,7 @@ create.onclick = function () {
             data[idn].create = v;
         }
         render(id);
+        treeMenu.appendChild(renderTree(-1,-1));
     }
 
     let span = document.createElement('span');
