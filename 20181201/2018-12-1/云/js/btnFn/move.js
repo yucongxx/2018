@@ -44,31 +44,34 @@ ok.onclick = function () {
         */
 
         if (!children.some(e => e.id == kid)) {
+            if (kid == breadNav.getElementsByTagName('span')[0].dataset.id * 1) {
+                alert('error');
+            } else {
+                seleEleArr.forEach(e => {
+                    let arr = getChild(kid);
+                    console.log(arr);
 
-            seleEleArr.forEach(e => {
-                let arr = getChild(kid);
+                    if (arr && arr.some(el => el.title === e.title)) {
+                        // e.title = e.title + '-副本';
 
-
-                if (arr && arr.some(el => el.title === e.title)) {
-                    // e.title = e.title + '-副本';
-
-                    let a = arr.filter(f => {
-                        let re = new RegExp('^' + e.title + '(-副本)*$');
-                        console.log(re.test(f.title));
-                        return re.test(f.title);
-                    }).sort((a, b) => {
-                        return a.title.length - b.title.length;
-                    });
-                    console.log(a);
-                    if (a.length == 1) {
-                        e.title = a[0].title + '-副本';
-                    } else {
-                        e.title = a[a.length - 1].title + '-副本';
+                        let a = arr.filter(f => {
+                            let re = new RegExp('^' + e.title + '(-副本)*$');
+                            console.log(re.test(f.title));
+                            return re.test(f.title);
+                        }).sort((a, b) => {
+                            return a.title.length - b.title.length;
+                        });
+                        console.log(a.length);
+                        if (a.length == 1) {
+                            e.title = a[0].title + '-副本';
+                        } else {
+                            e.title = a[a.length - 1].title + '-副本';
+                        }
                     }
-                }
-                e.pid = kid;
-                e.checked = false;
-            });
+                    e.pid = kid;
+                    e.checked = false;
+                });
+            }
             render(breadNav.getElementsByTagName('span')[0].dataset.id * 1);
             treeMenu.appendChild(renderTree(-1, -1));
         } else {

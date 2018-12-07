@@ -14,6 +14,7 @@ del.onclick = function () {
             })
             tanbox.style.display = 'none';
             render(breadNav.getElementsByTagName('span')[0].dataset.id * 1);
+            treeMenu.appendChild(renderTree(-1, -1));
         }
         btns[1].onclick = function () {
             tanbox.style.display = 'none';

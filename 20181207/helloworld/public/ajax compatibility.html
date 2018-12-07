@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .ok {
+            border: 1px solid green;
+        }
+
+        .error {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    用户名:<input type="text" id="txt" />
+    <script>
+        /*
+            XMLHttpRequest再低版本ie下（除ie6），里面的事件和属性都有
+            不同
+            比如onload，只要高版本才能使用，但是，所有版本都支持
+            onreadystatechange，能够监听到请求的步聚
+            onreadystatechange能监听5步，每步都有对应的数字0-4，但是第0
+            步监听不到，最多只能监听1-4，通过xhr.readystate能拿到
+            这些数字：
+            在执行1-4步的时候，每完成一次都会调用一次onreadystatechange，
+            直到最后一步为4的时候，说明服务器已经有回应
+
+            存有XMLHttpRequest的状态，从0-4发生了变化
+
+            0：请求未初始化
+            1：服务器连接已建立
+            2：请求已接收
+            3：请求处理中
+            4：请求已完成，且响应已就绪
+
+            如果在同步的情况下，低版本ie是按照正常的同步变成顺序解析
+            1-4
+
+            在高版本下，没有1-3的过程，直接走4
+
+            send到底放在哪？
+
+            如果是onload，放在onload的上面也行，下面也可以
+
+            但是如果是onreadystatechange，那么send放在事件的下面
+            1.能够多监听一步
+            2.低版本ie下如果把send放事件的上面，在同步的时候，第4步
+            监听不到
+
+            总体来说，如果ie低版本
+            1.创建ajax对象
+            2.填写地址
+            3.等待onreadystatechange
+            4.发送
+
+            高版本
+            1.创建ajax对象
+            2.填写地址
+            3.发送
+            4.等待onload
+            5.拿到返回的信息
+        */
+
+        // txt.onblur=function (){
+        //     var xhr=new XMLHttpRequest;
+        //     xhr.open('get','/getget?ren='+encodeURI(txt.value)+'&id='+Date.now(),false);
+        //     xhr.onreadystatechange=function (){
+        //         if(xhr.readyState===4){
+        //             console.log(444);
+        //         }
+        //     }
+        //     xhr.send();
+
+        //     console.log('下面的代码');
+            
+        // }
+
+        /*
+            虽然readyState已经为4,但是接受的信息不一定是成功的
+
+            status Code状态码
+
+            xhr.status查看当前的状态码
+
+            xhr.status=>http状态码
+            200：客户端成功接受到服务端的返回数据
+            301：永久重定向，当前域名地址已经永久跳转到另外一个
+            域名地址中
+            302：临时重定向，一般情况下当服务器超过它的加载负荷
+            范围之后，会重新跳转到一个新的服务器
+            304：加载缓存，一般我们请求一个页面，浏览器会默认将这个页面的全部
+            信息缓存到本地，当我们再次请求这个页面的时候，会默认走缓存
+            xhr.open('get','get?ren=+new Date().getTime()',true);
+            307：临时重定向，针对的是http传输协议，一开始http=>https
+            400：访问参数错误
+            401：没有访问权限
+            404：请求地址资源不存在
+            413：客户端请求的文件超过服务端的最大承载容量
+            500：位置服务器错误
+            503：服务器超过最大负荷
+            只要是5开头的都是服务端的问题，页面是4开头的都是前端的问题。2和3都是表示请求成功
+        */
+        
+    </script>
+</body>
+
+</html>
