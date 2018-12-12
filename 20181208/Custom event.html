@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: yellowgreen;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+    <script>
+        document.addEventListener('长按', function (ev) {
+            if (ev.ev.target.id === 'box') {
+                box2.style.opacity = 1 - ev.n;
+            }
+        })
+
+        let event = document.createEvent('HTMLEvents');
+        event.initEvent('长按', true, true);
+
+        let timer = null;
+        let n = 0;
+        let animation = null;
+        document.onmousedown = function (ev) {
+            timer = setTimeout(function () {
+                (function animate() {
+                    animation = requestAnimationFrame(animate);
+                    n += 0.01;
+                    event.ev = ev;
+                    event.n = n;
+                    document.dispatchEvent(event);
+                })();
+            }, 300)
+
+            document.onmouseup = function () {
+                clearTimeout(timer);
+                if (animation) {
+                    cancelAnimationFrame(animation);
+                    n = 0;
+                }
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            Promis是异步编程的一种解决方案
+            用promise主要是换种写法
+
+            resolve:成功
+            reject:失败
+
+            new Promis((resolve,reject)=>{
+                resolve()
+                reject()
+            })
+        */
+
+        let a = 10;
+        let p = new Promis((resolve, reject) => {
+            setTimeout(() => {
+                a = 20;
+                resolve(a);
+            }, 1000);
+        });
+        
+        p.then((a)=>{
+            console.log(a);
+        },()=>{
+            //失败
+        })
+
+    </script>
+
+</body>
+
+</html>

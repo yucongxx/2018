@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="chooseCard.css" />
+</head>
+
+<body>
+    <div class="box">
+        <ul class="clearfix ulBox">
+            <li class="active">新闻</li>
+            <li>电影</li>
+            <li>音乐</li>
+            <li>运动</li>
+        </ul>
+        <div class="divBox">
+            <div class="active">最新新闻</div>
+            <div>最新电影</div>
+            <div>最新音乐</div>
+            <div>最新运动</div>
+        </div>
+    </div>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+        $(function () {
+            $('.box>.ulBox>li').on('click', function () {
+                let index = $(this).index();
+                $(this).addClass('active')
+                .siblings().removeClass('active')
+                .parent().children('div')
+                .eq(index).addClass('active')
+                .removeClass('active');
+            })
+        })();
+
+
+    </script>
+</body>
+
+</html>

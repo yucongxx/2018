@@ -1,0 +1,36 @@
+.box {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.box ul {
+    position: relative;
+    top: 1px;
+}
+
+.box li {
+    float: left;
+    line-height: 35px;
+    border: 1px solid #aaa;
+    text-align: center;
+    width: 25%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.box .divBox div {
+    line-height: 150px;
+    text-align: center;
+    border: 1px solid #aaa;
+    display: none;
+}
+
+.box li.active {
+    background: greenyellow;
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+.box .divBox div.active {
+    display: block;
+}

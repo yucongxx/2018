@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .ok{
+            border: 1px solid green;
+        }
+        .error{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    用户名:<input type="text" id="txt" />
+    <ul id="ul"></ul>
+</body>
+<script>
+    /*
+        
+        $.ajax({
+            url:http://www.baidu.com,
+            data:{
+                bbs:123,
+                xx:321
+            }
+            success(){
+
+            }
+        })
+    */
+    txt.onblur = function () {
+        ajax({
+            url: '/sleep',
+            data: {
+                name: this.value
+            },
+            success(data) {
+                console.log(data);
+            },
+            error(e) {
+                console.log(e);
+            },
+            timeout() {
+                console.log('超时');
+            },
+            settime: 1000
+        });
+    }
+
+
+    function ajax(json) {
+        let opt = {
+            url: '',
+            data: {},
+            success: function () { },
+            error: function () { },
+            timeout: function () { },
+            settime: 8000,
+            method: 'get',
+            type: 'json'
+        }
+
+        Object.assign(opt, json);//把opt和json合并,opt中和json中相同的会被json覆盖
+
+        let xhr = new XMLHttpRequest;
+        if (opt.method === 'get') {
+            xhr.open('get', opt.url + '?' + queryString(opt.data, true));
+            xhr.onreadystatechange = ready;
+            xhr.send();
+        } else {
+            xhr.open('post', opt.url);
+            xhr.onreadystatechange = ready;
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.send(queryString(opt.data));
+        }
+
+        function ready() {
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 200 && xhr.status <= 307) {
+                    switch (opt.type) {
+                        case 'json':
+                            opt.success(eval('(' + xhr.responseText + ')'));
+                            break;
+                        case 'xml':
+                            opt.success(xhr.responseXML);
+                            break;
+                        default:
+                            opt.success(xhr.responseText);
+                    }
+                } else {
+                    opt.error({ code: xhr.status })
+                }
+            }
+        };
+
+        xhr.timeout = opt.settime;
+        xhr.ontimeout = function () {
+            opt.timeout();
+        }
+
+    }
+
+
+
+
+
+
+
+    function queryString(data, onOff) {
+        let arr = [];
+        if (onOff) data.cache = +new Date;
+        for (let attr in data) {
+            arr.push(attr + '=' + (onOff ? encodeURI(data[attr]) : data[attr]));
+
+        }
+        return arr.join('&');
+    }
+
+   
+
+
+
+
+
+
+    // let obj = queryString('www.baidu.com?bbs=123&xx=321');
+    // function queryString(data, onOff) {
+    //     let obj = {};
+    //     let str = data.substring(data.indexOf('?') + 1);
+    //     let arr = str.split('&');
+    //     arr.forEach((e) => {
+    //        let arr1= e.split('=');
+    //        obj[arr1[0]]=arr1[1];
+    //     })
+    //     console.log(obj);
+    // }
+
+    // let obj2 = { bbs: "123", xx: "321" };
+    // let arr=[];
+    // for (let attr in obj2) {
+    //     arr.push(attr+'='+obj2[attr]);
+
+    // }
+    // console.log(arr.join('&'));
+</script>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            文件里面是什么跟后缀名关系不大，里面的代码才有关系
+            script标签中的src能够直接跨域访问资源，并且尽量解析js代码
+
+            jsonp必须具备以下条件：
+            1.保证全局有个函数
+            2.数据必须是这个函数的调用格式
+            3.当要请求数据的时候，创建一个script标签，把src等于请求的接口
+            再把script标签插入到页面。这个时候就做到了按需请求
+
+
+        */
+        function fn(a){
+            console.log(a);
+        }
+        // console.log(a);
+        // alert(1);
+    </script>
+    <script>
+        var a=10;
+        // alert(2);
+        fn(a);
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            jsonp必须具备以下条件：
+            1.保证全局有个函数
+            2.数据必须是这个函数的调用格式（函数名+括号，内部填充数据的格式）
+            3.当请求数据的时候，创建一个script标签，把src等于请求的接口，把script
+            标签插入到页面中，这样就做到了按需请求。
+
+        
+        */
+        function fn2(data) {
+            console.log(data);
+        }
+        window.onload = function () {
+            document.onclick = function () {
+                let oS = document.createElement('script');
+                // oS.src = oS.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=海王&cb=fn2';
+                oS.src='http://localhost/jsonp?callback=fn2';    
+                document.getElementsByTagName('head')[0].appendChild(oS);
+                oS.remove();
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
