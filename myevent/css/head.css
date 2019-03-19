@@ -1,0 +1,140 @@
+#wrap {
+    display: grid;
+    grid-template-columns: 0.2fr 0.5fr 4.3fr;
+    grid-template-rows: 54px 725px;
+    grid-gap: 0px;
+}
+
+#header {
+    grid-column: 1/4;
+}
+
+#header .main {
+    height: 50px;
+    background: #3498db;
+    border: 2px solid #2a7aaf
+}
+
+#header .left {
+    float: left;
+    font-size: 20px;
+    color: #fff;
+    margin-right: 40px;
+    line-height: 50px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+#header .nav {
+    line-height: 50px;
+    float: left
+}
+
+#header .nav li {
+    float: left;
+    margin-left: 20px;
+}
+
+#header .nav li a {
+    color: #fff;
+    line-height: 40px;
+    font-size: 10px;
+}
+
+#header .nav li:hover {
+    opacity: 0.7;
+}
+
+#header .main .right {
+    float: right;
+    padding: 15px 0 10px 0;
+    height: 20px;
+}
+
+#header .main .right .admin {
+    float: left;
+    width: 100px;
+    text-align: center;
+}
+
+#header .main .right .admin span {
+    font-size: 10px;
+    color: #fff;
+    cursor: pointer;
+    line-height: 20px;
+    text-align: center;
+}
+
+#header .main .right .admin i {
+    font-size: 23px;
+    color: #fff;
+    vertical-align: middle;
+}
+
+#header .main .right .adDetail {
+    width: 200px;
+    height: 200px;
+    border: 1px solid red;
+    display: none;
+}
+
+#header .main .right .hPage {
+    float: left;
+    width: 70px;
+    color: #fff;
+    text-align: center;
+    border-left: 1px solid rgb(87, 173, 207);
+    cursor: pointer;
+}
+
+#header .main .right .hPage i {
+    font-size: 20px;
+    line-height: 20px;
+}
+
+#header .main .right .message {
+    width: 70px;
+    float: left;
+    color: #fff;
+    text-align: center;
+    border-left: 1px solid rgb(87, 173, 207);
+    cursor: pointer;
+}
+
+#header .main .right .message i {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#header .main .right .skin {
+    width: 70px;
+    float: left;
+    color: #fff;
+    text-align: center;
+    border-left: 1px solid rgb(87, 173, 207);
+    cursor: pointer;
+}
+
+#header .main .right .skin i {
+    font-size: 25px;
+    line-height: 20px;
+}
+
+#header .main .right .login {
+    width: 70px;
+    float: left;
+    color: #fff;
+    text-align: center;
+    border-left: 1px solid rgb(87, 173, 207);
+    cursor: pointer;
+}
+
+#header .main .right .login i {
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.navActive {
+    background: #66b1e4;
+    opacity: .1;
+}

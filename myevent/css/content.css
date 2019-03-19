@@ -1,0 +1,270 @@
+#contentLeftClass {
+    padding-top: 10px;
+    background: #464c5b;
+    text-align: center;
+    position: relative;
+}
+
+#contentLeftClass .home {
+    display: block;
+}
+
+#contentLeftClass .sale {
+    display: none;
+}
+
+#contentLeftClass .opration {
+    display: none;
+}
+
+#contentLeftClass .finance {
+    display: none;
+}
+
+#contentLeftClass .systemManage {
+    display: none;
+}
+
+#contentLeftClass li {
+    margin-bottom: 25px;
+}
+
+#contentLeftClass i {
+    font-size: 20px;
+    color: #cccccc;
+}
+
+#contentLeftClass div {
+    font-size: 14px;
+    color: #fff;
+}
+
+#contentLeftClass .triangle {
+    position: absolute;
+    top: 25px;
+    left: 72%;
+    width: 0px;
+    height: 0px;
+    border: 9px solid;
+    border-color: transparent #eaedf1 transparent transparent;
+}
+
+#contentMenu {
+    height: 100%;
+    background: #eaedf1;
+    color: #666666;
+    font-size: 14px;
+}
+
+#contentMenu .cTitle {
+    background: #f2f2f2;
+    color: #999999;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 30px;
+    /* border-bottom: 1px solid rgb(170, 163, 163); */
+}
+
+#contentMenu li {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+#contentMenu li span {
+    margin-left: 20px;
+    font-size: 8px;
+}
+
+#contentMenu li a {
+    font-size: 12px;
+    color: #666666;
+}
+
+#contentMenu li a:hover {
+    color: #1ABC9C;
+}
+
+.contentMActive {
+    color: #1ABC9C;
+    background: #fff;
+}
+
+/*
+    设置消失
+*/
+
+#contentMenu .system {
+    display: block;
+}
+
+#contentMenu .product {
+    display: none;
+}
+
+#contentMenu .orderForm {
+    display: none;
+}
+
+#contentMenu .inventory {
+    display: none;
+}
+
+#contentMenu .user {
+    display: none;
+}
+
+#contentMenu .discount {
+    display: none;
+}
+
+#contentMenu .message {
+    display: none;
+}
+
+#contentMenu .detail {
+    display: none;
+}
+
+#contentMenu .statistics {
+    display: none;
+}
+
+#contentMenu .accounting {
+    display: none;
+}
+
+#contentMenu .setting {
+    display: none;
+}
+
+/*
+    系统页面首页
+*/
+
+#mainContent {
+    /* padding: 50px 0 0 136px; */
+    background: #f9f9f9;
+}
+
+#mainContent .mCTop {
+    height: 50px;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+#mainContent .mCTop a {
+    display: inline-block;
+    width: 78px;
+    height: 28px;
+    border: 1px solid #cccccc;
+    background: #fff;
+    font-size: 13px;
+    margin: 9px 0 0 1200px;
+}
+
+#mainContent .mCTop a i {
+    margin-left: 12px;
+    color: #666666;
+}
+
+#mainContent .mCTop a span {
+    margin-left: 8px;
+    line-height: 28px;
+    color: #666666;
+}
+
+#mainContent .mCMiddle {
+    padding-left: 135px;
+    width: 1058px;
+}
+
+#mainContent .mCMiddle li {
+    position: relative;
+    padding-top: 26px;
+    float: left;
+    width: 245px;
+    height: 82px;
+    background: #fff;
+    margin-top: 21px;
+    border: 1px solid #e4e4e4;
+    /* border-radius: 3%; */
+}
+
+#mainContent .mCMiddle li:nth-child(2) {
+    margin-left: 23px;
+}
+
+#mainContent .mCMiddle li:nth-child(3) {
+    margin-left: 23px;
+}
+
+#mainContent .mCMiddle li:nth-child(4) {
+    margin-left: 24px;
+}
+
+#mainContent .mCMiddle i {
+    color: #1abc9c;
+    font-size: 51px;
+    margin-left: 18px;
+}
+
+#mainContent .mCMiddle span {
+    color: #999999;
+    position: absolute;
+    top: 30px;
+    left: 83px;
+}
+
+#mainContent .mCMiddle div {
+    color: #666666;
+    font-size: 20px;
+    position: absolute;
+    top: 55px;
+    left: 85px;
+}
+
+#mainContent .mCPending {
+    width: 1058px;
+    height: 199px;
+    margin-left: 135px;
+    margin-top: 21px;
+    border: 1px solid #e4e4e4;
+}
+
+#mainContent .mCPending div {
+    width: 1039px;
+    height: 46px;
+    line-height: 46px;
+    background: #f3f3f3;
+    border: 1px solid #e4e4e4;
+    padding-left: 19px;
+    font-size: 13px;
+    font-weight: 600
+}
+
+#mainContent .mCPending .firstCol li:first-child {
+    margin-top: 11px;
+}
+
+#mainContent .mCPending .firstCol {
+    float:left;
+}
+
+#mainContent .mCPending .firstCol li {
+    height: 39px;
+    line-height: 39px;
+    margin-left: 39px;
+}
+
+#mainContent .mCPending .firstCol span:hover {
+    color: #1ABC9C;
+}
+
+#mainContent .mCPending .firstCol li span {
+    color: #666666;
+    font-size: 14px;
+}
+
+#mainContent .mCPending .firstCol li span:first-child {
+    margin-right: 193px;
+}
